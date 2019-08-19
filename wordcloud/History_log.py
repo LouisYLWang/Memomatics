@@ -26,7 +26,7 @@ with sqlite3.connect(db_file) as conn:
     data = " ".join(jieba.cut(msg, cut_all=True))
 
 
-
+'''
 #df['content'][200:400]
 df['content'][119]
 df['createTime'][0]
@@ -34,7 +34,7 @@ a = df['createTime'][119]
 a
 time.ctime(1463055892)
 df['content'][df['content'].str.contains('~SEMI_XML~')]
-
+'''
 
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt

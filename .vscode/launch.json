@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+      {
+        "type": "chrome",
+        "request": "launch",  // 可以是attach和launch
+        "name": "Launch Chrome",  // 此项配置的名字，显示在调试页的配置选择下拉框中。
+        "url": "http://localhost:8080",  // chrome 自动启动时打开的网址(你开发环境的部署地址)。
+        "webRoot": "${workspaceFolder}",  // 静态文件所在的本机目录(正常情况下就是项目根目录)。
+        "sourceMaps": true
+      },
+      { "name": "使用本机 Chrome 调试", 
+        "type": "chrome", 
+        "request": "launch", 
+        "file": "${workspaceRoot}\\wordcloud\\optionKeywords.html", 
+        "runtimeExecutable": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", 
+        "sourceMaps": true, 
+        "webRoot": "${workspaceRoot}", 
+        "port":5433        
+    }
+
+    ]
+  }
