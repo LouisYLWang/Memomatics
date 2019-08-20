@@ -91,10 +91,7 @@ get_message_time(df_h)
 
 # word cloud
 def word_cloud(df, quantity):
-    content_all = ''
-    for s in df['content']:
-        content_all += s
-    print("finished parsing text message")
+    
     wordfilter = list("abcdefghijklmnopqrstquvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     text_ls = list(df['content'])
     res = list()
@@ -103,8 +100,8 @@ def word_cloud(df, quantity):
             t = t.replace(wf, "")
         if t:
             res.append(t)
-
     text = ''.join(res)
+    print("finished parsing text message")
     seg_list = jieba.cut(text, cut_all=False)
     print("finished text segmentation")
     c = Counter()
@@ -112,7 +109,6 @@ def word_cloud(df, quantity):
         c[x] += 1
 
     punc = list(r'.。（）()?？:：！![]"‘’“”+=-*$#@~《》< ，,/\\～…\|¯_\'')
-
     for p in punc:
         if p in c:
             del c[p]
@@ -124,12 +120,9 @@ def word_cloud(df, quantity):
     print("finished disposing puctuation and stopwords")
     return dict(c.most_common(quantity))
 
-word_cloud(df_h, 200)
+word_cloud(df_z, 200)
 
 
-
-
-pd.DataFrame(dict(c))
 
 
 
