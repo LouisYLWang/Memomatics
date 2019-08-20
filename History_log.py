@@ -2,6 +2,7 @@ import pandas as pd
 import sqlite3
 import time
 import jieba
+from collections import Counter
 
 
 '''
@@ -67,6 +68,7 @@ print(count_h)
 len(df_z)
 len(df_h)
 
+
 def get_message_time(df_):
     time_map = [dict() for i in range(8)]
     for t in df_['createTime']:
@@ -87,8 +89,69 @@ def get_message_time(df_):
 
 get_message_time(df_h)
 
+# word cloud
+def word_cloud(df, quantity):
+    content_all = ''
+    for s in df['content']:
+        content_all += s
+    print("finished parsing text message")
+    wordfilter = list("abcdefghijklmnopqrstquvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    text_ls = list(df['content'])
+    res = list()
+    for t in text_ls:
+        for wf in wordfilter:
+            t = t.replace(wf, "")
+        if t:
+            res.append(t)
+
+    text = ''.join(res)
+    seg_list = jieba.cut(text, cut_all=False)
+    print("finished text segmentation")
+    c = Counter()
+    for x in seg_list:
+        c[x] += 1
+
+    punc = list(r'.。（）()?？:：！![]"‘’“”+=-*$#@~《》< ，,/\\～…\|¯_\'')
+
+    for p in punc:
+        if p in c:
+            del c[p]
+
+    keys = list(c.keys())
+    for key in keys:
+        if len(key) == 1:
+            del c[key]
+    print("finished disposing puctuation and stopwords")
+    return dict(c.most_common(quantity))
+
+word_cloud(df_h, 200)
+
+
+
+
+pd.DataFrame(dict(c))
+
+
+
 
 '''
+seg_list = jieba.cut(txt)
+c = Counter()
+for x in seg_list:
+    c[x] += 1
+print('常用词频度统计结果')
+print(c.most_common(100))
+#for (k,v) in c.most_common(100):
+#    print('%s%s %s  %d' % ('  '*(5-len(k)), k, '*'*int(v/3), v))
+return c.most_common(100)
+
+'''
+
+
+
+
+'''
+list(map(str, range(25)))
 #df['content'][200:400]
 df['content'][119]
 df['createTime'][0]
