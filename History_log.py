@@ -3,24 +3,8 @@ import sqlite3
 import time
 import jieba
 from collections import Counter
+from emotion_analysis import *
 
-
-'''
-talker = "pdd003"
-with sqlite3.connect(db_file) as conn:
-    c = conn.cursor()
-    stmt = "SELECT content FROM message WHERE talker='{}'".format(talker)
-    msg = []
-    for row in c.execute(stmt):
-        if not row or not row[0] or row[0].find('xml') != -1:
-            continue
-        msg.append(row[0])
-    msg = "\n".join(msg)
-    wordfilter = list("abcdefghijklmnopqrstquvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ哈")
-    for wf in wordfilter:
-        msg = msg.replace(wf, "")
-    data = " ".join(jieba.cut(msg, cut_all=True))
-'''
 
 db_file = r'resource\wechat_log\decrypted_database.db'
 
@@ -48,13 +32,13 @@ with sqlite3.connect(db_file) as conn:
 
 df_z = df_z_1.append(df_z_2)
 df_h = df_h_1.append(df_h_2)
-
+df_all = df_cr.append(df_pc)
+'''
 df_z.to_csv('z.csv')
 df_h.to_csv('h.csv')
+'''
 
-df_all = df_cr.append(df_pc)
-
-
+'''
 count_z = 0
 for m in df_z['content']:
     count_z += len(m)
@@ -67,7 +51,7 @@ print(count_h)
 
 len(df_z)
 len(df_h)
-
+'''
 
 def get_message_time(df_):
     time_map = [dict() for i in range(8)]
@@ -87,7 +71,8 @@ def get_message_time(df_):
     return ret
     
 
-get_message_time(df_h)
+#get_message_time(df_h)
+#get_message_time(df_z)
 
 # word cloud
 def word_cloud(df, quantity):
@@ -120,77 +105,38 @@ def word_cloud(df, quantity):
     print("finished disposing puctuation and stopwords")
     return dict(c.most_common(quantity))
 
-word_cloud(df_z, 200)
+#word_cloud(df_z, 200)
 
 
+def get_content_freq(df, quantity):
+    punc = list(r'.。（）()?？:：！![]"‘’“”+=-*$#@~《》< ，,/\\～…\|¯_\'')
+    text_count = Counter()
+    for txt in df['content']:
+        for p in punc:
+            txt = txt.replace(p, "")
+        text_count[txt] += 1
+    return dict(text_count.most_common(quantity))
+
+#get_content_freq(df_h, 200)
+#get_content_freq(df_z, 100)
 
 
+def get_emotion_score(df):
+    punc = list(r'.。（）()?？:：！![]"‘’“”+=-*$#@~《》< ，,/\\～…\|¯_\'')
+    text_count = Counter()
+    for txt in df['content']:
+        for p in punc:
+            txt = txt.replace(p, "")
+        text_count[txt] += 1
 
+    emotion_score_h = 0
+    count = 0
+    for text in text_count.keys():
+        temp_res = get_sentiments(text)
+        if temp_res['ret'] == 0:
+            emotion_score_h += temp_res['data']['polar'] * temp_res['data']['confd'] * text_count[text] 
+        count += 1
+    return emotion_score_h, count
 
-'''
-seg_list = jieba.cut(txt)
-c = Counter()
-for x in seg_list:
-    c[x] += 1
-print('常用词频度统计结果')
-print(c.most_common(100))
-#for (k,v) in c.most_common(100):
-#    print('%s%s %s  %d' % ('  '*(5-len(k)), k, '*'*int(v/3), v))
-return c.most_common(100)
-
-'''
-
-
-
-
-'''
-list(map(str, range(25)))
-#df['content'][200:400]
-df['content'][119]
-df['createTime'][0]
-a = df['createTime'][119]
-a
-
-
-
-
-
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-import jieba
-import sqlite3
-
-
-def wechat_wordcloud(talker):
-    font_path = "Miui-Regular.ttf"
-    data = wechat_record(talker)
-    img = WordCloud(font_path=font_path, width=1400, height=1400,
-                    margin=2, collocations=False).generate(data)
-    plt.imshow(img)
-    plt.axis("off")
-    plt.show()
-    img.to_file("{}.png".format(talker))
-
-
-def wechat_record(talker):
-    conn = sqlite3.connect(db_file)
-    c = conn.cursor()
-    stmt = "SELECT content FROM message WHERE talker='{}'".format(talker)
-    msg = []
-    for row in c.execute(stmt):
-        if not row or not row[0] or row[0].find('xml') != -1:
-            continue
-        msg.append(row[0])
-    msg = "\n".join(msg)
-    wordfilter = list("abcdefghijklmnopqrstquvwxyz0123456789哈")
-    for wf in wordfilter:
-        msg = msg.replace(wf, "")
-    data = " ".join(jieba.cut(msg, cut_all=True))
-    conn.close()
-    return data
-
-
-if __name__ == '__main__':
-    talker = "wyl400421"
-    wechat_wordcloud(talker)
-    '''
+print(get_emotion_score(df_h))
+print(get_emotion_score(df_z))
