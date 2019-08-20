@@ -48,8 +48,8 @@ with sqlite3.connect(db_file) as conn:
 df_z = df_z_1.append(df_z_2)
 df_h = df_h_1.append(df_h_2)
 
-
-
+df_z.to_csv('z.csv')
+df_h.to_csv('h.csv')
 
 df_all = df_cr.append(df_pc)
 
@@ -61,13 +61,32 @@ print(count_z)
 
 count_h = 0
 for m in df_h['content']:
-    count_z += len(m)
-print(count_z)
-
-
+    count_h += len(m)
+print(count_h)
 
 len(df_z)
 len(df_h)
+
+def get_message_time(df_):
+    time_map = [dict() for i in range(8)]
+    for t in df_['createTime']:
+        h = time.strftime('%H', time.gmtime(t//1000))
+        w = int(time.strftime('%w', time.gmtime(t//1000)))
+        # notice: time.strftime has a shift of 8, probably because of time zone
+        key = (int(h) + 8)%24
+
+        if key not in time_map[w]:
+            time_map[w][key] = 0
+        time_map[w][key] += 1
+    
+    ret = list()
+    for w_ in range(7):
+        ret += [[w_,h_,time_map[w_][h_]] for h_ in range(24)]
+    return ret
+    
+
+get_message_time(df_h)
+
 
 '''
 #df['content'][200:400]
@@ -75,7 +94,7 @@ df['content'][119]
 df['createTime'][0]
 a = df['createTime'][119]
 a
-time.ctime(1463055892)
+
 
 
 
