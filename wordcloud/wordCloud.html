@@ -37,6 +37,12 @@
                                 ].join(',') + ')';
                             }
                         },
+                        normal: {
+                            color: function () {
+                                return 
+                                colors[Math.floor(Math.random()*colors.length)];
+                            }
+                        },
                         emphasis: {
                             shadowBlur: 10,
                             shadowColor: '#333'

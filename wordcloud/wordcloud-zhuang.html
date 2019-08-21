@@ -226,29 +226,25 @@
             }
 
             var maskImage = new Image();
+            var colors = ['rgb(217,78,93)', 'rgb(224,126,77)', 'rgb(231,175,62)', 'rgb(203,192,80)', 'rgb(142,177,133)', 'rgb(80,163,186)']
 
             var option = {
                 series: [ {
                     type: 'wordCloud',
-                    sizeRange: [10, 100],
+                    sizeRange: [5, 100],
                     rotationRange: [-90, 90],
                     rotationStep: 45,
                     gridSize: 2,
-                    shape: 'pentagon',
                     maskImage: maskImage,
                     drawOutOfBound: false,
                     textStyle: {
                         normal: {
                             color: function () {
-                                return 'rgb(' + [
-                                    Math.round(Math.random() * 160),
-                                    Math.round(Math.random() * 160),
-                                    Math.round(Math.random() * 160)
-                                ].join(',') + ')';
-                            }
+                                return colors[Math.floor(Math.random()*colors.length)];
+                            },
                         },
                         emphasis: {
-                            color: 'green'
+                            color: '#98e165'
                         }
                     },
                     data: data.sort(function (a, b) {
@@ -262,7 +258,7 @@
                 chart.setOption(option);
             }
 
-            maskImage.src = './test.png';
+            maskImage.src = './shape_zhuang.png';
 
             window.onresize = function () {
                 chart.resize();

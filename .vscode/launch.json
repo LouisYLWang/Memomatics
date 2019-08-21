@@ -13,7 +13,7 @@
       { "name": "使用本机 Chrome 调试", 
         "type": "chrome", 
         "request": "launch", 
-        "file": "${workspaceRoot}\\photomap\\lines-bmap.html", 
+        "file": "${workspaceRoot}\\index.html", 
         "runtimeExecutable": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", 
         "sourceMaps": true, 
         "webRoot": "${workspaceRoot}", 

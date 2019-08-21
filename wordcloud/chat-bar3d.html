@@ -11,7 +11,6 @@
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
        <script type="text/javascript">
@@ -198,8 +197,7 @@ option = {
         max: 7000,
         min:0,
         inRange: {
-            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-        }
+            color:['#50a3ba', '#eac736', '#d94e5d']        }
     },
     xAxis3D: {
         type: 'category',
@@ -213,6 +211,22 @@ option = {
         type: 'value'
     },
     grid3D: {
+        axisLine: {
+            lineStyle:{
+                color: '#45558d',
+            }
+        },
+        axisLabel:{
+            textStyle:{
+                color: '#f3f1ec',
+            }
+        },
+        splitLine:{
+            show: false
+        },
+        axisPointer:{
+            show: false
+        },
         boxWidth: 200,
         boxDepth: 80,
         light: {
@@ -242,18 +256,18 @@ option = {
         },
         
         itemStyle: {
-            opacity: 0.7
+            opacity: 0.6
         },
 
         emphasis: {
             label: {
                 textStyle: {
                     fontSize: 20,
-                    color: '#900'
+                    color: '#85763f'
                 }
             },
             itemStyle: {
-                color: '#900'
+                color: '#85763f'
             }
         }
     }]
