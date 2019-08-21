@@ -2,4 +2,5 @@
 *.db
 *.pptx
 *.pyc
+*.csv
 resource/

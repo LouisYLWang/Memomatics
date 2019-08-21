@@ -33,6 +33,8 @@ with sqlite3.connect(db_file) as conn:
 df_z = df_z_1.append(df_z_2)
 df_h = df_h_1.append(df_h_2)
 df_all = df_cr.append(df_pc)
+
+
 '''
 df_z.to_csv('z.csv')
 df_h.to_csv('h.csv')
@@ -138,5 +140,21 @@ def get_emotion_score(df):
         count += 1
     return emotion_score_h, count
 
-print(get_emotion_score(df_h))
-print(get_emotion_score(df_z))
+def add_emotion_score_to_df(df):
+    count = 0
+    n = len(df['content'])
+    progress = 1
+    df['emotion'] = 0
+
+    for i in range(n + 1):
+        if count == n // 1000 * progress:
+            print("finished " + str(progress/10) + " %!")
+            progress += 1
+        text = df.iloc[i,0]
+        temp_res = get_sentiments(text)
+        if temp_res['ret'] == 0:
+            df.iloc[i,2] = temp_res['data']['polar'] * temp_res['data']['confd']
+        count += 1
+
+add_emotion_score_to_df(df_h)
+add_emotion_score_to_df(df_z)
