@@ -7,13 +7,7 @@
        <div id="container" style="height: 100%"></div>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-       <script type="text/javascript">
+           <script type="text/javascript">
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
@@ -197,7 +191,14 @@ option = {
         max: 7000,
         min:0,
         inRange: {
-            color:['#50a3ba', '#eac736', '#d94e5d']        }
+            color:['#50a3ba', '#eac736', '#d94e5d']        
+            },
+        top: '5%',
+        left: '45%',
+        orient: 'horizontal',
+        textStyle:{
+            color: "#fafafc"
+        }
     },
     xAxis3D: {
         type: 'category',
@@ -229,6 +230,9 @@ option = {
         },
         boxWidth: 200,
         boxDepth: 80,
+        viewControl:{
+            projection:'orthographic',
+        },
         light: {
             main: {
                 intensity: 1.2

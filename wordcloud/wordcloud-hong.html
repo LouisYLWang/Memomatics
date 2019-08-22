@@ -2,6 +2,7 @@
     <head>
         <meta charset="utf-8">
         <script src='https://cdn.bootcss.com/echarts/3.7.2/echarts.simple.js'></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
         <script src='../dist/echarts-wordcloud.js'></script>
     </head>
     <body>
@@ -12,6 +13,7 @@
                 margin: 0;
             }
         </style>
+
         <div id='main'></div>
         <script>
             var chart = echarts.init(document.getElementById('main'));
@@ -224,11 +226,33 @@
                     value: Math.sqrt(keywords[name])
                 })
             }
+            function a () {
+                                return './h_avatar/' + [
+                                Math.floor(Math.random()*10)
+                                ].join('') + '.jpg';
+                            }
 
             var maskImage = new Image();
             var colors = ['rgb(217,78,93)', 'rgb(224,126,77)', 'rgb(231,175,62)', 'rgb(203,192,80)', 'rgb(142,177,133)', 'rgb(80,163,186)']
             var colors2 =['#d94e5d', '#e07e4d', '#e7af3e', '#cbc050', '#8eb185', '#50a3ba']
             var option = {
+                graphic: 
+                {
+                        type: 'image',
+                        id: 'logo',
+                        left: '3%',
+                        top: '30%',
+                        z: 10,
+                        bounding: 'raw',
+                        draggable: false,
+                        style: {
+                            image: a(),
+                                
+                            width: 100,
+                            height: 100,
+                            opacity: 1
+                        }
+                },
                 series: [ {
                     type: 'wordCloud',
                     sizeRange: [5, 100],

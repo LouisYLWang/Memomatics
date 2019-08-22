@@ -4,3 +4,5 @@
 *.pyc
 *.csv
 resource/
+localfile/
+wordcloud/hist/
