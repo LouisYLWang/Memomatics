@@ -1,0 +1,8 @@
+*.jpg
+*.db
+*.pptx
+*.pyc
+*.csv
+resource/
+localfile/
+wordcloud/hist/
