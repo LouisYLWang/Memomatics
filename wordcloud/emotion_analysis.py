@@ -41,7 +41,7 @@ def get_sentiments(comments):
 
 if __name__ == '__main__':
     # test
-    get_sentiments('啥时候丢的？')
+    get_sentiments('')
 df_h = pd.read_csv('wordcloud\h_finished.csv')
 df_z = pd.read_csv('wordcloud\z_finished.csv')
 
