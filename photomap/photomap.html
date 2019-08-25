@@ -463,7 +463,9 @@ option = null;
         option = {
             // backgroundColor: '#404a59',
             tooltip : {
-                trigger: 'item'
+                trigger: 'item',
+                formatter:  'Time：{b0}<br />Position: {c0}'
+
             },
             visualMap: {
                 type:'piecewise',
@@ -627,7 +629,7 @@ option = null;
             },
             series : [
                 {
-                    name: 'pm2.5',
+                    name: 'a place with photo',
                     type: 'scatter',
                     symbol:'pin',
                     coordinateSystem: 'bmap',
@@ -638,11 +640,12 @@ option = null;
                     label: {
                         normal: {
                             formatter: '{b}',
-                            position: 'right',
+                            position: 'bottom',
                             show: false
                         },
                         emphasis: {
-                            show: true
+
+                            show: false
                         }
                     },
                     itemStyle: {
