@@ -12,19 +12,19 @@ dependencies: python (jieba, sqlite3, pandas, urllib, requests, PIL.Images/ExifT
 
 ####  1.1 word cloud
 
-![](D:\workspace\Memomatics\assets\wordcloud.png)
+![](images\wordcloud.png)
 
 
 
 ####  1.2 emotion analysis and visualization
 
-![](D:\workspace\Memomatics\assets\emo.png)
+![](images\emo.png)
 
 
 
 #### 1.3 bar3d-style calendar heatmap 
 
-![](D:\workspace\Memomatics\assets\chat.png)
+![](images\chat.png)
 
 
 
@@ -32,8 +32,8 @@ dependencies: python (jieba, sqlite3, pandas, urllib, requests, PIL.Images/ExifT
 
 ####  2.0 photo map
 
-![](D:\workspace\Memomatics\assets\map1.png)
+![](images\map1.png)
 
 
 
-![](D:\workspace\Memomatics\assets\map2.png)
+![](images\map2.png)
