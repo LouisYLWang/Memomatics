@@ -1,5 +1,7 @@
 ## Memomatics
 
+site: https://louisylwang.github.io/Memomatics/
+
 Memomatics is a **toy** project for giving **a surprise for my girlfriend's birthday**. It contains *instant message log visualization* and *photo geographical information visualization*. It runs on local client while has a online user interface. 
 
 dependencies: python (jieba, sqlite3, pandas, urllib, requests, PIL.Images/ExifTags), echart 3.7.2, tencent AI Lab nlpemo
